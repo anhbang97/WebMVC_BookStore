@@ -1,0 +1,140 @@
+﻿@using WebMVC_BookStore.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/_LayoutUser.cshtml";
+}
+
+
+
+
+
+
+<div class="section-title-5 mb-30">
+
+    <h2 style="text-align:center">THÔNG TIN GIỎ HÀNG</h2>
+</div>
+<table align="center" border="1">
+    <tr style="text-align:center; font-weight:bold">
+        <td>Mã Sách</td>
+        <td>Tên Sách</td>
+        <td> Hình Ảnh</td>
+        <td> Số Lượng</td>
+        <td> Đơn Giá</td>
+        <td>Thành Tiền</td>
+        <td width="50px"></td>
+        <td width="50px"></td>
+        <td width="50px"></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center; font-weight:bold">
+            <td>@item.iMaSach</td>
+            <td>@item.sTenSach</td>
+            <td><img src="~/img/HinhAnhSanPham/@item.sAnhBia" /></td>
+            @using (Html.BeginForm("CapNhat_GioHang", "GioHang", new { @iMaSach = item.iMaSach }))
+            {
+                <td>
+                <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong" style="background-color:gold"/>
+                </td>
+            <td>@String.Format("{0:0,0}", item.dDonGia.ToString()) VNĐ</td>
+            <td>@String.Format("{0:0,0}", item.dThanhTien.ToString()) VNĐ</td>
+            <td><a href="@Url.Action("Details", "BookStore", new { id = item.iMaSach })">Chi Tiết</a></td>
+            <td>@Html.ActionLink("Xóa", "Xoa_GioHang", new { @iMaSach = item.iMaSach })</td>
+            <td><input type="submit" value="Cập Nhật" /></td>
+            }
+        </tr>
+    }
+
+
+
+
+    <tr style="font-weight:bold; text-align:right; color:blue">
+        <td colspan="4">Số lượng: @ViewBag.TongSoLuong</td>
+        <td colspan="5">Tổng Tiền: @String.Format("{0:0,0}", ViewBag.TongTien.ToString()) VNĐ</td>
+    </tr>
+    <tr style="font-weight:bold; color:orange; text-align:right">
+        <td colspan="9">
+            @Html.ActionLink("Xóa Giỏ Hàng", "XoaTatCa_GioHang")
+        </td>
+    </tr>
+    <tr style="font-weight:bold; color:orange; text-align:right">
+        <td colspan="9" align="center">
+            @Html.ActionLink("Đặt Hàng", "DatHang","GioHang")
+        </td>
+    </tr>
+
+</table>
+
+    @*<div class="row">
+            <div class="col-lg-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-code"> Mã Sản Phẩm</th>
+                                    <th class="product-thumbnail">Hình ảnh</th>
+                                    <th class="product-name">Sản phẩm</th>
+                                    <th class="product-price">Giá bán</th>
+                                    <th class="product-quantity">Số lượng</th>
+                                    <th class="product-subtotal">Thành Tiền</th>
+
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td class="product-code"><a href="#">@item.iMaSach</a></td>
+                                        <td class="product-thumbnail"><a href="#"><img src="~/img/HinhAnhSanPham/@item.sAnhBia" alt="man" /></a></td>
+                                        <td class="product-name"><a href="#">@item.sTenSach</a></td>
+                                        <td class="product-price"><span class="amount">@String.Format("{0:0,0}", item.dDonGia.ToString()) VNĐ</span></td>
+                                        <td class="product-quantity"><input type="number" value="1"> @ViewBag.TongSoLuong</td>
+                                        <td class="product-subtotal">@String.Format("{0:0,0}", item.dThanhTien.ToString())VNĐ</td>
+                                    </tr>
+
+                                </tbody>
+
+                            }
+
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <table>
+                    <tbody>
+                        <tr class="order-total">
+                            <th>Tổng Tiền Thanh Thanh Toán:</th>
+                            <td>
+                                <strong>
+                                    <span class="amount">@String.Format("{0:0,0}", ViewBag.TongTien.ToString()) VNĐ</span>
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

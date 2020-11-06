@@ -1,0 +1,87 @@
+﻿@using WebMVC_BookStore.Models;
+@model List<Sach>
+@{
+    ViewBag.Title = "SanPhamTheo_ChuDe";
+    Layout = "~/Views/Layout/_LayoutUser.cshtml";
+}
+
+@ViewBag.Sach
+@*@model IEnumerable<WebMVC_BookStore.Models.Sach>
+    @{
+        ViewBag.Title = "SanPhamTheo_ChuDe";
+        Layout = "~/Views/Layout/_LayoutUser.cshtml";
+    }*@
+
+
+<div class="section-title-5 mb-30">
+    <h2>Sách Theo Chủ Đề</h2>
+</div>
+
+
+<div class="tab-content">
+    <div class="tab-pane active" id="th">
+        <div class="row">
+
+            @ViewBag.Sach
+            @foreach (var sach in Model)
+            {
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+
+                    <div class="product-wrapper mb-40">
+                        `
+                        <div class="product-img">
+                            <a href="@Url.Action("Details","BookStore", new { MaSach = sach.MaSach})">
+                                <img src="~/img/HinhAnhSanPham/@sach.AnhBia" alt="book" class="primary" />
+                            </a>
+                            <div class="quick-view">
+                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
+                                    <i class="fa fa-search-plus"></i>
+                                </a>
+                            </div>
+                            <div class="product-flag">
+                                <ul>
+                                    <li><span class="sale">new</span></li>
+                                    <li><span class="discount-percentage">-5%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-details text-center">
+                            <div class="product-rating">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                            <h4><a href="#">@sach.TenSach</a></h4>
+                            <div class="product-price">
+                                <ul>
+                                    <li>@sach.GiaBan</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                        <div class="product-link">
+                            <div class="product-button">
+                                <a href="@Url.Action("Details","BookStore")" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng </a>
+                            </div>
+                            <div class="add-to-link">
+                                <ul>
+                                    <li><a href="@Url.Action("Details","BookStore" )" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>

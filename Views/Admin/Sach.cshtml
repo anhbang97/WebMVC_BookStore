@@ -1,0 +1,152 @@
+﻿@*@model IEnumerable<WebMVC_BookStore.Models.Sach>*@
+
+
+@using WebMVC_BookStore.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<Sach>
+@helper Trancate(string input, int length )
+{ 
+    if (input.Length < length)
+    {
+            @input
+    }
+    else
+    {
+            @input.Substring(0,length)<text>....</text>
+    }
+
+}
+
+@{
+    ViewBag.Title = "Sach";
+Layout = "~/Views/Layout/_LayoutAdmin.cshtml";
+}
+
+<div class="section-title-5 mb-30">
+    <h2>Sách</h2>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TenSach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().GiaBan)
+        </th>
+        <th>
+           
+            @Html.DisplayNameFor(model => model.First().MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().AnhBia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NgayCapNhat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SoLuongTon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaChuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaNXB)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Trancate(item.MoTa, 100)
+                @*@Html.DisplayFor(modelItem => item.MoTa)*@
+            </td>
+            <td>
+                <img src="@Url.Content("~/img/HinhAnhSanPham/" + item.AnhBia)" />
+                @*@Html.DisplayFor(modelItem => item.AnhBia)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuDe.TenChuDe)
+                @*@Html.DisplayFor(modelItem => item.MaChuDe)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhaXuatBan.TenNXB)
+                @*@Html.DisplayFor(modelItem => item.MaNXB)*@
+            </td>
+            <td>
+                @Html.ActionLink("Sữa", "SuaSach", new { id = item.MaSach }) |
+                @Html.ActionLink("Chi Tiết", "ChiTietSach", new { id = item.MaSach }) |
+                @Html.ActionLink("Xóa", "XoaSach", new { id = item.MaSach })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    .MenuTrang li{
+        display:inline;
+    }
+</style>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber )/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model,Page => Url.Action("Sach", new { Page = Page}))
+</div>
+
+
+<div class="section-title-5 mb-30">
+    <h2>Quản Lý Thông Tin Sách</h2>
+</div>
+<p>
+    @Html.ActionLink("Thêm Mới","ThemMoiSach")
+</p>
+
+<table class="table" border="1">
+    <tr>
+        <th style="width:200px">Tên sách</th>
+        <th style="width:100px">Giá bán</th>
+        <th style="width:300px">Mô tả</th>
+        <th style="width:120px">Ảnh bìa</th>
+        <th style="width:150px">Ngày cập nhật</th>
+        <th style="width:120px">Sô lượng tồn</th>
+        <th style="width:120px">Tên chủ đề</th>
+        <th style="width:100px">Tên nhà xuất bản</th>
+        <th style="width:200px"></th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.TenSach)</td>
+        <td>@Html.DisplayFor(modelItem => item.GiaBan)</td>
+        <td>@Html.DisplayFor(modelItem => item.MoTa)</td>
+        <td> <img src="@Url.Content("~/img/HinhAnhSanPham/" + item.AnhBia)" /></td>
+        <td>@Html.DisplayFor(modelItem => item.NgayCapNhat)</td>
+        <td>@Html.DisplayFor(modelItem => item.SoLuongTon)</td>
+        <td>@Html.DisplayFor(modelItem => item.ChuDe.TenChuDe)</td>
+        <td>@Html.DisplayFor(modelItem => item.NhaXuatBan.TenNXB)</td>
+        <td>
+            @Html.ActionLink("Sữa", "SuaSach", new { id = item.MaSach }) |
+            @Html.ActionLink("Chi Tiết", "ChiTietSach", new { id = item.MaSach }) |
+            @Html.ActionLink("Xóa", "XoaSach", new { id = item.MaSach })
+        </td>
+    </tr>
+    }
+</table>

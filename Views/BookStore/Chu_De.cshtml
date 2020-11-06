@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebMVC_BookStore.Models.ChuDe>
+
+
+
+<div class="left-title mb-20">
+    <h4>Chủ Đề Sách </h4>
+
+</div>
+
+<div class="left-menu mb-30">
+    <ul>
+        <li>
+
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("SanPhamTheo_ChuDe","BookStore",new { MaChuDe = item.MaChuDe})">
+                    @item.TenChuDe<span></span>
+                </a>
+            }
+
+        </li>
+    </ul>
+</div>

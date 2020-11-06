@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Layout/_LayoutUser.cshtml";
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-size:cover;
+        background-position: center;
+        font-family: sans-serif;
+        
+    }
+    .loginbox {
+        width: 556px;
+        height: 321px;
+        background: #023;
+        color: #fff;
+        top: 165%;
+        left: 52%;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        box-sizing: border-box;
+        padding: 44px 29px;
+    }
+
+    .avatar {
+        width: 151px;
+        height: 134px;
+        border-radius: 78%;
+        position: absolute;
+        top: -97px;
+        left: calc(45% - 50px);
+    }
+    h2 {
+        margin: 0;
+        padding: 0 0 20px;
+        text-align: center;
+        font-size: 22px;
+      
+    }
+    input {
+        color: brown;
+        line-height: normal;
+    }
+
+</style>
+<div class="section-title-5 mb-30" style="text-align:center">
+    <h2 style="text-align:center">ĐĂNG NHẬP</h2>
+</div>
+<body>
+    <h4 style="color:red; text-align:center">@ViewBag.ThongBao</h4>
+    <div class="loginbox">
+        <img src="~/img/logo/avatar.png" class="avatar">
+        <table>
+
+            
+               
+          
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <tr style="height:60px; ">
+                    <td>Tên đăng nhập:</td>
+                    <td>
+                        @Html.TextBox("TenDN")
+
+                    </td>
+                </tr>
+                <tr style="height:60px;">
+                    <td align="right">Mật khẩu:</td>
+                    <td>
+                        @Html.Password("MatKhau")
+                        @ViewData["Loi2"]
+                    </td>
+                </tr>
+                <tr style="height:40px; color:red;" >
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Đăng Nhập"  />
+                        
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
